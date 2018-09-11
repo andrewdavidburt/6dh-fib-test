@@ -48,6 +48,6 @@ func HandleCall(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/{digits}", HandleCall)
+	router.HandleFunc("/api/fibonacci/{digits}", HandleCall)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

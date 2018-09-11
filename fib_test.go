@@ -53,7 +53,7 @@ func TestIterateFib(t *testing.T) {
 
 //func TestHandleCall(t *testing.T) {
 //	router := mux.NewRouter().StrictSlash(true)
-//        router.HandleFunc("/{digits}", HandleCall)
+//        router.HandleFunc("/api/fibonacci/{digits}", HandleCall)
 //	req := httptest.NewRequest("GET", "http://example.com/foo", nil)
 //	w := httptest.NewRecorder()
 //}
