@@ -23,6 +23,11 @@ func Equal(a, b []int) bool {
     return true
 }
 
+//test Fib - After failing to figure out how to compare the value of the enclosed
+// function output, I then tried to resort to simply comparing the output of two
+// identically called functions in order to at least test consistent output, but
+// am still getting errors.
+
 //func TestFib(t *testing.T) {
 //	var result = Fib()
 //	var comparison = Fib()
@@ -30,6 +35,8 @@ func Equal(a, b []int) bool {
 //		t.Error("Expected 0, got ", result)
 //	}
 //}
+
+//test IterateFib with custom slice comparison function. This test works.
 
 func TestIterateFib(t *testing.T) {
 	var digits int = 5	
@@ -39,6 +46,10 @@ func TestIterateFib(t *testing.T) {
 		t.Error("Expected", comparison, ", received", result)
 	}
 }
+
+//test HandleCall -  This requires spinning up a test router and then sending it
+// a sample API call and reading the results. I've been studying several approaches
+// that require 3rd party libraries, and haven't finished this in time.
 
 //func TestHandleCall(t *testing.T) {
 //	router := mux.NewRouter().StrictSlash(true)
