@@ -37,9 +37,10 @@ func HandleCall(w http.ResponseWriter, r *http.Request) {
 	digits, _ := strconv.Atoi(vars["digits"])
 	output := IterateFib(digits)
 	outJ, _ := json.Marshal(output)
-	if digits > 92 {
-		fmt.Fprintln(w, "[ \"Error: The highest digit value accepted is 92, you used", digits, "\" ]") 
-        } else {
+	if digits > 92 || digits < 1 {
+		fmt.Fprintln(w, "[ \"Error: Integer between 1 and 92 required, you used", digits, "\" ]") 
+//add error-checking to differentiate invalid integers and non-integers
+	} else {
 	fmt.Fprintln(w, string(outJ))
 	}
 }

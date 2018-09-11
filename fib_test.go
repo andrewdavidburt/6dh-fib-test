@@ -10,22 +10,35 @@ import (
 //	"log"
 )
 
-func TestFib(t *testing.T) {
-	var result = Fib()
-	var comparison = Fib()
-	if result == nil {
-		t.Error("Expected 0, got ", result)
-	}
+//slice comparison function, as slices can't be compared with standard operators
+func Equal(a, b []int) bool {
+    if len(a) != len(b) {
+        return false
+    }
+    for i, v := range a {
+        if v != b[i] {
+            return false
+        }
+    }
+    return true
 }
 
-//func TestIterateFib(t *testing.T) {
-//	digits := 1
-////increase digits
-//	result := IterateFib(digits)
-//	if result != 0 {
+//func TestFib(t *testing.T) {
+//	var result = Fib()
+//	var comparison = Fib()
+//	if result == nil {
 //		t.Error("Expected 0, got ", result)
 //	}
 //}
+
+func TestIterateFib(t *testing.T) {
+	var digits int = 5	
+	var comparison = []int{1, 1, 2, 3, 5}
+	var result = IterateFib(digits)
+	if !(Equal(result, comparison)) {
+		t.Error("Expected", comparison, ", received", result)
+	}
+}
 
 //func TestHandleCall(t *testing.T) {
 //	router := mux.NewRouter().StrictSlash(true)
