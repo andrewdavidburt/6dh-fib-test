@@ -57,3 +57,15 @@ func TestIterateFib(t *testing.T) {
 //	req := httptest.NewRequest("GET", "http://example.com/foo", nil)
 //	w := httptest.NewRecorder()
 //}
+
+func TestHandleCall(t *testing.T) {
+	var comparison = "[1,1,2,3,5]"
+	req, _ := http.NewRequest("GET", "/api/fibonacci/5", nil)
+	response := executeRequest(req)
+
+	checkResponseCode(t, http.StatusOK, response.Code)
+
+	if body := response.Body.String(); body != comparison {
+		t.Errorf("Expected", comparison, ", got %s", body)
+	}
+}

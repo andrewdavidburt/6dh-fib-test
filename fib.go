@@ -1,6 +1,7 @@
 package main
 
-//todo: read reqs, comment, testing, valid json, edge cases, errors, error tests
+//in order to run this package, you will need to install the gorilla url router
+//using this command: go get github.com/gorilla/mux
 
 import (
 	"fmt"
@@ -37,9 +38,13 @@ func HandleCall(w http.ResponseWriter, r *http.Request) {
 	digits, _ := strconv.Atoi(vars["digits"])
 	output := IterateFib(digits)
 	outJ, _ := json.Marshal(output)
+
+// I chose to cap this at 92, as the requirements PDF document specified
+// that type int is preferred due to being more performant, and with type
+// int the upper bound for values that don't fail on my system was 92
+
 	if digits > 92 || digits < 1 {
-		fmt.Fprintln(w, "[ \"Error: Integer between 1 and 92 required, you used", digits, "\" ]") 
-//add error-checking to differentiate invalid integers and non-integers
+	fmt.Fprintln(w, "[ \"Error: Integer between 1 and 92 required, you used", digits, "\" ]") 
 	} else {
 	fmt.Fprintln(w, string(outJ))
 	}
