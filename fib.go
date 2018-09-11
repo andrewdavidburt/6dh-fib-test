@@ -1,15 +1,14 @@
 package main
 
+//todo: read reqs, comment, testing, valid json, edge cases, errors, error tests
+
 import (
 	"fmt"
 	"strconv"
-	//"encoding/json"
-	//"github.com/manyminds/api2go"
-	//"github.com/julienschmidt/httprouter"
+	"encoding/json"
 	"net/http"
 	"github.com/gorilla/mux"
 	"log"
-	// "testing"
 )
 
 // Fib returns a function that returns fibonacci #s
@@ -25,11 +24,9 @@ func Fib() func() int {
 func IterateFib(n int) []int {
 	var f = Fib()
 	var output []int
-
         for i := 0; i < n; i++ {
                 output = append(output, f())
         }
-	
 	return output
 }
 
@@ -39,16 +36,15 @@ func HandleCall(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	digits, _ := strconv.Atoi(vars["digits"])
 	output := IterateFib(digits)
-//	outJ, _ := json.Marshal(IterateFib(digits))
-
-//	fmt.Fprintln(w, "json fib show:", outJ)
-	fmt.Fprintln(w, "{\"fibonacci\":", output, "}")
+	outJ, _ := json.Marshal(output)
+	if digits > 92 {
+		fmt.Fprintln(w, "[ \"Error: The highest digit value accepted is 92, you used", digits, "\" ]") 
+        } else {
+	fmt.Fprintln(w, string(outJ))
+	}
 }
 
 func main() {
-
-//	outJ, _ := json.Marshal(output)
-//	fmt.Println(string(outJ))
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/{digits}", HandleCall)
